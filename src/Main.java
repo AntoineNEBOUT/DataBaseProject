@@ -17,6 +17,7 @@ public class Main
     static boolean socketCanBeRunning = true;
     static int index = 0;
     // static HashMap<String, String> indexStorage = new HashMap<String, String>();
+    //commentaire de texte 2
     static HashMap<String, HashMap> tabStorage = new HashMap<String, HashMap>();
     static HashMap<String, String> users = new HashMap<String, String>();
     static HashMap<String, String> admins = new HashMap<String, String>();
