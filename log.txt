@@ -1,0 +1,6 @@
+request:ADD USER by 'admin' -> SUCCESS | user : c / d | TIME : 08/10/2022 18:12:08
+request:REMOVE USER by 'admin' -> SUCCESS | user : c / d | TIME : 08/10/2022 18:13:11
+request:STOP by 'admin' -> SUCCESS | TIME : 08/10/2022 18:18:29
+request:STOP by 'admin' -> SUCCESS | TIME : 08/10/2022 18:19:47
+request:GET LOG by 'admin' -> SUCCESS | TIME : 08/10/2022 18:20:41
+request:STOP by 'admin' -> SUCCESS | TIME : 08/10/2022 18:20:51
