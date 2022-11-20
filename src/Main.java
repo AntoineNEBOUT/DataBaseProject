@@ -172,6 +172,35 @@ public class Main
                                     soc.close();
                                 }
                             }
+                            else if(mTypeOfRequest.equals("getAll"))
+                            {
+                                if(dataBaseCheckIdentity.check(users, mUserName, mPassword) || dataBaseCheckIdentity.check(admins, mUserName, mPassword))
+                                {
+                                    String returnedContent = "null";
+
+                                    returnedContent = dataBaseGetAll.get(tabStorage, mMapName, encryption, pathToStorage);
+
+                                    if(!returnedContent.equals("null"))
+                                    {
+                                        writer.println("successfulGettingAll:\n".concat(returnedContent));
+                                        soc.close();
+
+                                        log.writeLog("request:GETALL by '".concat(mUserName).concat("' -> SUCCESS"), true);
+                                    }
+                                    else
+                                    {
+                                        writer.println("gettingAllFailed:probably 'tab name' or 'user name' are wrong");
+                                        soc.close();
+
+                                        log.writeLog("request:GETALL by '".concat(mUserName).concat("' -> FAIL"), true);
+                                    }
+                                }
+                                else
+                                {
+                                    writer.println("User is not identified");
+                                    soc.close();
+                                }
+                            }
                             else if(mTypeOfRequest.equals("save"))
                             {
                                 if(dataBaseCheckIdentity.check(users, mUserName, mPassword) || dataBaseCheckIdentity.check(admins, mUserName, mPassword))
@@ -302,6 +331,7 @@ public class Main
                                 /*
                                 - users and admins :
 		                            * get data : <userName>;<password>;get;<tabName>
+		                            * get all data : <userName>;<password>;getAll;<tabName>
 		                            * save data : <userName>;<password>;save;<tabName>;<text to save>
 		                            * help : <userName>;<password>;help
 
@@ -313,7 +343,7 @@ public class Main
 		                            * create tab : <adminName>;<adminPassword>;create;<tabNameToCreate>
 		                            * delete tab : <adminName>;<adminPassword>;delete;<tabNameToDelete>
                                 */
-                                writer.println("help:\n\t- users and admins :\n\t\t* get data : <userName>;<password>;get;<tabName>\n\t\t* save data : <userName>;<password>;save;<tabName>;<text to save>" +
+                                writer.println("help:\n\t- users and admins :\n\t\t* get data : <userName>;<password>;get;<tabName>\n\t\t* get all data : <userName>;<password>;getAll;<tabName>\n\t\t* save data : <userName>;<password>;save;<tabName>;<text to save>" +
                                         "\n\t\t* help : <userName>;<password>;help\n\n\t- admins only :\n\t\t* add user (classic user / admin) : <adminName>;<adminPassword>;aUser;notAdmin;<userNameToAdd>;<passwordToAdd>" +
                                         "\n\t\t/ <adminName>;<adminPassword>;aUser;admin;<adminNameToAdd>;<adminPasswordToAdd>\n\t\t* remove user (classic user / admin) : " +
                                         "<adminName>;<adminPassword>;rUser;notAdmin;<userNameToRemove>;<passwordToRemove>\n\t\t/ <adminName>;<adminPassword>;rUser;admin;<adminNameToRemove>;<adminPasswordToRemove>" +
@@ -329,6 +359,7 @@ public class Main
                                     soc.close();
 
                                     log.writeLog("request:STOP by '".concat(mUserName).concat("' -> SUCCESS"), true);
+                                    log.writeLog("=============================================", false);
 
                                     System.exit(0);
                                 }
